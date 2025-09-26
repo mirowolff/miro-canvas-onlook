@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ZoomPanel from './ZoomPanel';
 import Toolbar from './Toolbar';
+import BoardBar from './BoardBar';
 
 interface CanvasState {
   zoom: number;
@@ -237,6 +238,9 @@ export default function Canvas() {
 
   return (
     <>
+      {/* Board Bar */}
+      <BoardBar />
+
       <div
         ref={containerRef}
         className="w-full h-full overflow-hidden"
