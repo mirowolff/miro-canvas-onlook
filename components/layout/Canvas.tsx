@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ZoomPanel from './ZoomPanel';
+import Toolbar from './Toolbar';
 
 interface CanvasState {
   zoom: number;
@@ -31,6 +32,7 @@ export default function Canvas() {
   const [isSpacePressed, setIsSpacePressed] = useState(false);
   const [lastMousePos, setLastMousePos] = useState<Point>({ x: 0, y: 0 });
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
+  const [selectedTool, setSelectedTool] = useState('cursor');
 
   // Handle window resize
   const updateCanvasSize = useCallback(() => {
@@ -228,6 +230,11 @@ export default function Canvas() {
     setCanvasState(prev => ({ ...prev, zoom: newZoom }));
   }, []);
 
+  // Handle tool selection
+  const handleToolSelect = useCallback((tool: string) => {
+    setSelectedTool(tool);
+  }, []);
+
   return (
     <>
       <div
@@ -249,6 +256,11 @@ export default function Canvas() {
         />
       </div>
 
+      {/* Toolbar */}
+      <Toolbar
+        selectedTool={selectedTool}
+        onToolSelect={handleToolSelect}
+      />
 
       {/* Zoom Panel */}
       <ZoomPanel
