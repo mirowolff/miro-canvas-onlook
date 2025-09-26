@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Noto_Sans } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const notoSans = Noto_Sans({ subsets: ['latin'], variable: '--font-noto-sans' })
 
 export const metadata: Metadata = {
   title: 'Miro Canvas - Onlook Compatible',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans`}>
+      <body className={`${notoSans.variable} font-sans`}>
         {children}
       </body>
     </html>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import ZoomPanel from './ZoomPanel';
 
 interface CanvasState {
   zoom: number;
@@ -161,37 +162,47 @@ export default function Canvas() {
     }
   }, [isDragging]);
 
-  // Handle wheel zoom
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
+  // Handle wheel zoom with native event listener
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
 
-    const rect = canvasRef.current?.getBoundingClientRect();
-    if (!rect) return;
+      const rect = canvasRef.current?.getBoundingClientRect();
+      if (!rect) return;
 
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
 
-    const zoomDelta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
-    const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, canvasState.zoom + zoomDelta));
+      const zoomDelta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
+      const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, canvasState.zoom + zoomDelta));
 
-    if (newZoom !== canvasState.zoom) {
-      // Calculate zoom center offset
-      const zoomRatio = newZoom / canvasState.zoom;
-      const newPanX = mouseX - (mouseX - canvasState.panX) * zoomRatio;
-      const newPanY = mouseY - (mouseY - canvasState.panY) * zoomRatio;
+      if (newZoom !== canvasState.zoom) {
+        // Calculate zoom center offset
+        const zoomRatio = newZoom / canvasState.zoom;
+        const newPanX = mouseX - (mouseX - canvasState.panX) * zoomRatio;
+        const newPanY = mouseY - (mouseY - canvasState.panY) * zoomRatio;
 
-      setCanvasState({
-        zoom: newZoom,
-        panX: newPanX,
-        panY: newPanY,
-      });
+        setCanvasState({
+          zoom: newZoom,
+          panX: newPanX,
+          panY: newPanY,
+        });
 
-      console.log('🔍 Zooming:', {
-        from: canvasState.zoom,
-        to: newZoom,
-        mousePos: { x: mouseX, y: mouseY },
-        newPan: { x: newPanX, y: newPanY }
-      });
+        console.log('🔍 Zooming:', {
+          from: canvasState.zoom,
+          to: newZoom,
+          mousePos: { x: mouseX, y: mouseY },
+          newPan: { x: newPanX, y: newPanY }
+        });
+      }
+    };
+
+    const canvas = canvasRef.current;
+    if (canvas) {
+      canvas.addEventListener('wheel', handleWheel, { passive: false });
+      return () => {
+        canvas.removeEventListener('wheel', handleWheel);
+      };
     }
   }, [canvasState]);
 
@@ -210,32 +221,74 @@ export default function Canvas() {
     drawGrid();
   }, [drawGrid]);
 
-  return (
-    <div
-      ref={containerRef}
-      className="w-full h-full overflow-hidden"
-      style={{
-        cursor: isSpacePressed ? (isDragging ? 'grabbing' : 'grab') : 'default',
-        height: '100vh',
-        width: '100vw'
-      }}
-    >
-      <canvas
-        ref={canvasRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onWheel={handleWheel}
-        className="w-full h-full"
-      />
+  // Zoom control functions for ZoomPanel
+  const handleZoomIn = useCallback(() => {
+    const newZoom = Math.min(MAX_ZOOM, canvasState.zoom + ZOOM_STEP);
+    setCanvasState(prev => ({ ...prev, zoom: newZoom }));
+    console.log('🔍 Zoom in to:', newZoom);
+  }, [canvasState.zoom]);
 
-      {/* Debug info */}
-      <div className="absolute top-4 left-4 bg-black bg-opacity-75 text-white p-2 rounded text-sm font-mono">
+  const handleZoomOut = useCallback(() => {
+    const newZoom = Math.max(MIN_ZOOM, canvasState.zoom - ZOOM_STEP);
+    setCanvasState(prev => ({ ...prev, zoom: newZoom }));
+    console.log('🔍 Zoom out to:', newZoom);
+  }, [canvasState.zoom]);
+
+  const handleFitToScreen = useCallback(() => {
+    // Reset to center and 100% zoom
+    setCanvasState({
+      zoom: 1,
+      panX: 0,
+      panY: 0,
+    });
+    console.log('🔍 Fit to screen - reset to 100%');
+  }, []);
+
+  const handleZoomToPercentage = useCallback((targetZoom: number) => {
+    const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, targetZoom));
+    setCanvasState(prev => ({ ...prev, zoom: newZoom }));
+    console.log('🔍 Zoom to percentage:', newZoom * 100 + '%');
+  }, []);
+
+  return (
+    <>
+      <div
+        ref={containerRef}
+        className="w-full h-full overflow-hidden"
+        style={{
+          cursor: isSpacePressed ? (isDragging ? 'grabbing' : 'grab') : 'default',
+          height: '100vh',
+          width: '100vw'
+        }}
+      >
+        <canvas
+          ref={canvasRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          className="w-full h-full"
+        />
+      </div>
+
+      {/* Debug info - positioned overlay on top of everything */}
+      <div
+        className="fixed bg-black bg-opacity-75 text-white p-2 rounded text-sm font-mono pointer-events-none z-40"
+        style={{ position: 'fixed', top: 0, left: '1rem' }}
+      >
         Zoom: {(canvasState.zoom * 100).toFixed(0)}%<br/>
         Pan: ({canvasState.panX.toFixed(0)}, {canvasState.panY.toFixed(0)})<br/>
         Space: {isSpacePressed ? 'ON' : 'OFF'} | Dragging: {isDragging ? 'ON' : 'OFF'}
       </div>
-    </div>
+
+      {/* Zoom Panel */}
+      <ZoomPanel
+        zoom={canvasState.zoom}
+        onZoomIn={handleZoomIn}
+        onZoomOut={handleZoomOut}
+        onFitToScreen={handleFitToScreen}
+        onZoomToPercentage={handleZoomToPercentage}
+      />
+    </>
   );
 }
