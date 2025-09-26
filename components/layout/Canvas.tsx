@@ -62,12 +62,6 @@ export default function Canvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    console.log('🎨 Drawing grid with state:', {
-      zoom: canvasState.zoom,
-      panX: canvasState.panX,
-      panY: canvasState.panY,
-      canvasSize: canvasSize
-    });
 
     ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
 
@@ -103,11 +97,9 @@ export default function Canvas() {
       if (e.code === 'Space' && !isSpacePressed) {
         e.preventDefault();
         setIsSpacePressed(true);
-        console.log('⌨️ Spacebar pressed - pan mode enabled');
       }
 
       if (e.key === 'r' || e.key === 'R') {
-        console.log('⌨️ Reset zoom to 100%');
         setCanvasState(prev => ({ ...prev, zoom: 1 }));
       }
     };
@@ -117,7 +109,6 @@ export default function Canvas() {
         e.preventDefault();
         setIsSpacePressed(false);
         setIsDragging(false);
-        console.log('⌨️ Spacebar released - pan mode disabled');
       }
     };
 
@@ -135,7 +126,6 @@ export default function Canvas() {
     if (isSpacePressed) {
       setIsDragging(true);
       setLastMousePos({ x: e.clientX, y: e.clientY });
-      console.log('🖱️ Started panning at:', { x: e.clientX, y: e.clientY });
     }
   }, [isSpacePressed]);
 
@@ -151,14 +141,12 @@ export default function Canvas() {
       }));
 
       setLastMousePos({ x: e.clientX, y: e.clientY });
-      console.log('🖱️ Panning by delta:', { deltaX, deltaY });
     }
   }, [isDragging, isSpacePressed, lastMousePos]);
 
   const handleMouseUp = useCallback(() => {
     if (isDragging) {
       setIsDragging(false);
-      console.log('🖱️ Stopped panning');
     }
   }, [isDragging]);
 
@@ -188,12 +176,6 @@ export default function Canvas() {
           panY: newPanY,
         });
 
-        console.log('🔍 Zooming:', {
-          from: canvasState.zoom,
-          to: newZoom,
-          mousePos: { x: mouseX, y: mouseY },
-          newPan: { x: newPanX, y: newPanY }
-        });
       }
     };
 
@@ -225,13 +207,11 @@ export default function Canvas() {
   const handleZoomIn = useCallback(() => {
     const newZoom = Math.min(MAX_ZOOM, canvasState.zoom + ZOOM_STEP);
     setCanvasState(prev => ({ ...prev, zoom: newZoom }));
-    console.log('🔍 Zoom in to:', newZoom);
   }, [canvasState.zoom]);
 
   const handleZoomOut = useCallback(() => {
     const newZoom = Math.max(MIN_ZOOM, canvasState.zoom - ZOOM_STEP);
     setCanvasState(prev => ({ ...prev, zoom: newZoom }));
-    console.log('🔍 Zoom out to:', newZoom);
   }, [canvasState.zoom]);
 
   const handleFitToScreen = useCallback(() => {
@@ -241,13 +221,11 @@ export default function Canvas() {
       panX: 0,
       panY: 0,
     });
-    console.log('🔍 Fit to screen - reset to 100%');
   }, []);
 
   const handleZoomToPercentage = useCallback((targetZoom: number) => {
     const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, targetZoom));
     setCanvasState(prev => ({ ...prev, zoom: newZoom }));
-    console.log('🔍 Zoom to percentage:', newZoom * 100 + '%');
   }, []);
 
   return (
@@ -271,15 +249,6 @@ export default function Canvas() {
         />
       </div>
 
-      {/* Debug info - positioned overlay on top of everything */}
-      <div
-        className="fixed bg-black bg-opacity-75 text-white p-2 rounded text-sm font-mono pointer-events-none z-40"
-        style={{ position: 'fixed', top: 0, left: '1rem' }}
-      >
-        Zoom: {(canvasState.zoom * 100).toFixed(0)}%<br/>
-        Pan: ({canvasState.panX.toFixed(0)}, {canvasState.panY.toFixed(0)})<br/>
-        Space: {isSpacePressed ? 'ON' : 'OFF'} | Dragging: {isDragging ? 'ON' : 'OFF'}
-      </div>
 
       {/* Zoom Panel */}
       <ZoomPanel

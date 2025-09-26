@@ -47,6 +47,7 @@ export default function ZoomPanel({
           overflow: hidden;
           font-size: 14px;
           padding: 4px;
+          transition: width 0.2s ease-in-out;
         }
 
         .zoom-button {
@@ -58,7 +59,8 @@ export default function ZoomPanel({
           background-color: transparent;
           border: none;
           cursor: pointer;
-          transition: background-color 0.2s;
+          border-radius: 4px;
+          transition: all 0.2s ease-in-out;
         }
 
         .zoom-button:hover {
@@ -84,6 +86,23 @@ export default function ZoomPanel({
 
         .zoom-controls {
           display: flex;
+          width: 0;
+          overflow: hidden;
+          transition: width 0.2s ease-in-out;
+        }
+
+        .zoom-panel:hover .zoom-controls {
+          width: 48px;
+        }
+
+        .list-button {
+          width: 0;
+          overflow: hidden;
+          transition: width 0.2s ease-in-out;
+        }
+
+        .zoom-panel:hover .list-button {
+          width: 24px;
         }
 
         .zoom-dropdown-container {
@@ -95,6 +114,7 @@ export default function ZoomPanel({
           background-color: transparent;
           border: none;
           padding: 6px 8px;
+          font-family: var(--font-noto-sans), system-ui, sans-serif;
           font-size: 14px;
           font-weight: 500;
           color: var(--text-neutrals);
@@ -110,7 +130,7 @@ export default function ZoomPanel({
           {/* List/Menu button */}
           <button
             onClick={onFitToScreen}
-            className="zoom-button"
+            className="zoom-button list-button"
             title="Fit to screen"
           >
             <div className="icon-container">
