@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import ZoomPanel from './ZoomPanel';
 import Toolbar from './Toolbar';
 import BoardBar from './BoardBar';
+import CollaborationBar from './CollaborationBar';
 
 interface CanvasState {
   zoom: number;
@@ -240,6 +241,9 @@ export default function Canvas() {
     <>
       {/* Board Bar */}
       <BoardBar />
+
+      {/* Collaboration Bar */}
+      <CollaborationBar />
 
       <div
         ref={containerRef}
