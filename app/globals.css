@@ -8,6 +8,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--font-noto-sans), system-ui, sans-serif;
   }
 
   html {
@@ -23,7 +24,7 @@
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #f2f2f2;
+    background-color: var(--colors-gray100);
     color: var(--text-neutrals);
     overflow: hidden;
     user-select: none;

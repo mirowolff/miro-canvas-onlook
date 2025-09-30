@@ -54,7 +54,6 @@ export default function MeAvatarWithCounter({
           padding: 2px 8px 2px 4px;
           margin-left: -6px;
           position: relative;
-          font-family: 'Noto Sans', system-ui, sans-serif;
           gap: 6px;
         }
 
@@ -75,7 +74,6 @@ export default function MeAvatarWithCounter({
         .counter-text {
           color: var(--colors-gray500);
           font-weight: 500;
-          font-family: 'Noto Sans', system-ui, sans-serif;
           flex-shrink: 0;
         }
 

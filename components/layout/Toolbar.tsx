@@ -164,12 +164,12 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
           width: 48px;
           height: 48px;
           border-radius: 50%;
-          border: 0.5px solid #e9eaef;
+          border: 0.5px solid var(--colors-gray150);
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 1px 8px rgba(34, 36, 40, 0.05);
+          box-shadow: 0 1px 8px var(--colors-alpha-black100);
           transition: transform 0.2s ease;
           position: relative;
           overflow: hidden;
@@ -221,7 +221,7 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
         }
 
         .toolbar.normal-mode {
-          background: white;
+          background: var(--colors-white);
         }
 
         .tool-button {
@@ -239,21 +239,21 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
         }
 
         .toolbar.ai-mode .tool-button:hover {
-          background-color: #eae7ff;
+          background-color: var(--colors-lilac150);
         }
 
         .toolbar.ai-mode .tool-button.selected {
-          background-color: #eae7ff;
-          color: #6631d8;
+          background-color: var(--colors-lilac150);
+          color: var(--colors-lilac700);
         }
 
         .toolbar.normal-mode .tool-button:hover {
-          background-color: #e8ecfc;
+          background-color: var(--colors-blue150);
         }
 
         .toolbar.normal-mode .tool-button.selected {
-          background-color: #e8ecfc;
-          color: #3859ff;
+          background-color: var(--colors-blue150);
+          color: var(--colors-blue500);
         }
 
         .icon-container {
@@ -284,7 +284,7 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
         }
 
         .switch-track.inactive {
-          background-color: #e9eaef;
+          background-color: var(--colors-gray150);
         }
 
         .switch-track.active {
@@ -302,7 +302,7 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
           align-items: center;
           justify-content: center;
           transition: all 0.3s ease;
-          box-shadow: 0 2px 4px rgba(34, 36, 40, 0.08);
+          box-shadow: 0 2px 4px var(--colors-alpha-black200);
         }
 
         .switch-thumb.inactive {
@@ -319,13 +319,13 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
         }
 
         .switch-thumb.inactive svg {
-          fill: #212428 !important;
-          color: #212428 !important;
+          fill: var(--colors-gray900) !important;
+          color: var(--colors-gray900) !important;
         }
 
         .switch-thumb.inactive svg * {
-          fill: #212428 !important;
-          color: #212428 !important;
+          fill: var(--colors-gray900) !important;
+          color: var(--colors-gray900) !important;
         }
 
         .switch-thumb.active svg {
@@ -340,7 +340,7 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
 
         .divider {
           height: 1px;
-          background-color: #e0e0e0;
+          background-color: var(--colors-gray200);
           margin: 8px 4px;
         }
 
@@ -353,11 +353,11 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
         }
 
         .undo-redo-panel.ai-mode {
-          background: white;
+          background: var(--colors-white);
         }
 
         .undo-redo-panel.normal-mode {
-          background: white;
+          background: var(--colors-white);
         }
 
         .undo-button, .redo-button {
@@ -376,12 +376,12 @@ export default function Toolbar({ selectedTool = 'cursor', onToolSelect }: Toolb
 
         .undo-redo-panel.ai-mode .undo-button:hover,
         .undo-redo-panel.ai-mode .redo-button:hover {
-          background-color: #eae7ff;
+          background-color: var(--colors-lilac150);
         }
 
         .undo-redo-panel.normal-mode .undo-button:hover,
         .undo-redo-panel.normal-mode .redo-button:hover {
-          background-color: #e8ecfc;
+          background-color: var(--colors-blue150);
         }
       `}</style>
     </>

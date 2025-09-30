@@ -114,7 +114,6 @@ export default function ZoomPanel({
           background-color: transparent;
           border: none;
           padding: 6px 8px;
-          font-family: var(--font-noto-sans), system-ui, sans-serif;
           font-size: 14px;
           font-weight: 500;
           color: var(--text-neutrals);

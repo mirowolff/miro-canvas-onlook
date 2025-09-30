@@ -50,7 +50,6 @@ export default function Avatar({
           border: 2px solid var(--colors-white);
           margin-left: -5px;
           position: relative;
-          font-family: 'Noto Sans', system-ui, sans-serif;
         }
 
         .avatar-base:first-child {

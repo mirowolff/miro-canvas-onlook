@@ -51,7 +51,6 @@ export default function Button({
           border: none;
           border-radius: 4px;
           cursor: pointer;
-          font-family: 'Noto Sans', system-ui, sans-serif;
           font-weight: 500;
           transition: all 0.2s ease;
           gap: 6px;
