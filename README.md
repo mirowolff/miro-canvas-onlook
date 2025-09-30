@@ -2,6 +2,8 @@
 
 A high-performance, interactive canvas interface inspired by Miro, built with Next.js 15, React 19, and Tailwind CSS 4. This project implements a feature-rich canvas with pan/zoom controls, grid rendering, and a polished UI using the Miro Design System.
 
+https://github.com/user-attachments/assets/eaa4a55c-4b50-4f60-8e3e-1b62ab0f7ac3
+
 ## Features
 
 ### Canvas Interactions
