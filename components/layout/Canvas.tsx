@@ -84,14 +84,21 @@ export default function Canvas() {
 
       ctx.fillStyle = '#c7c7c8';
 
-      // Draw dots
-      for (let x = offsetX; x < canvasSize.width; x += scaledGridSize) {
-        for (let y = offsetY; y < canvasSize.height; y += scaledGridSize) {
-          ctx.beginPath();
+      // Calculate visible range with padding
+      const startX = Math.max(0, offsetX);
+      const endX = canvasSize.width;
+      const startY = Math.max(0, offsetY);
+      const endY = canvasSize.height;
+
+      // Draw dots (optimized to only render visible area)
+      ctx.beginPath();
+      for (let x = startX; x < endX; x += scaledGridSize) {
+        for (let y = startY; y < endY; y += scaledGridSize) {
+          ctx.moveTo(x + 1, y);
           ctx.arc(x, y, 1, 0, 2 * Math.PI);
-          ctx.fill();
         }
       }
+      ctx.fill();
     }
   }, [canvasState, canvasSize]);
 
