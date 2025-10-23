@@ -29,10 +29,13 @@ https://github.com/user-attachments/assets/eaa4a55c-4b50-4f60-8e3e-1b62ab0f7ac3
 
 - **Framework**: Next.js 15 with App Router and Turbopack
 - **Runtime**: React 19 with latest features
-- **Styling**: Tailwind CSS 4
-- **Icons**: @mirohq/design-system-icons
+- **Styling**: Tailwind CSS 4 + styled-jsx
+- **Design System**: @mirohq/design-system (full component library)
+- **Design Tokens**: @mirohq/design-tokens (via design-system)
+- **Icons**: @mirohq/design-system-icons (605+ icons)
+- **Visual Editor**: Onlook (Next.js visual code editor)
 - **Package Manager**: Bun
-- **TypeScript**: Full type safety
+- **TypeScript**: Full type safety with strict mode
 
 ## Getting Started
 
@@ -55,6 +58,97 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the canvas in action.
+
+## Working with Onlook
+
+This project is designed to work seamlessly with [Onlook](https://github.com/onlook-dev/onlook), a visual code editor for Next.js applications. See our [CLAUDE.md](./CLAUDE.md) file for complete AI development guidelines.
+
+### Prompting with Onlook + Miro Design System
+
+This project has [CLAUDE.md](./CLAUDE.md) configured with all styling conventions, so you can prompt naturally. The AI will automatically use Miro components, design tokens, and styled-jsx patterns.
+
+#### Natural Prompts (Just Describe What You Want)
+
+```
+"Add a blue button that says 'Save'"
+→ AI uses Miro's Button component with blue-500 color
+
+"Create a settings panel with a list of options"
+→ AI uses Box/Flex from Miro DS, with proper spacing tokens
+
+"Add a card grid showing user profiles"
+→ AI uses Tailwind grid + Miro tokens for styling
+
+"Build a modal with a semi-transparent backdrop"
+→ AI uses alpha-black tokens and proper z-index
+
+"Create a toolbar button with a settings icon"
+→ AI uses IconButton + @mirohq/design-system-icons
+```
+
+#### When to Be More Specific
+
+You only need to be specific when you want something different from defaults:
+
+```
+"Create a sidebar with a green accent color"
+→ Mentions color because green isn't the default
+
+"Add a button without any icon, just text"
+→ Clarifies to avoid default icon behavior
+
+"Build a card with custom rounded corners"
+→ Specifies custom styling need
+```
+
+#### Quick Tips
+
+✅ **Just describe the UI** - The system knows to use Miro components
+✅ **Mention colors by name** - "blue", "green" maps to Miro tokens
+✅ **Trust the conventions** - CLAUDE.md ensures proper patterns
+✅ **Override when needed** - Be specific only for exceptions
+
+### Available Miro Components
+
+Use these components directly in your prompts:
+
+**Layout:**
+- `Box`, `Flex`, `Grid` - Layout containers
+
+**Interactive:**
+- `Button`, `IconButton` - Buttons with Miro styling
+- `Input`, `Textarea` - Form inputs
+- `Checkbox`, `Switch`, `Slider` - Form controls
+- `Select`, `Combobox` - Dropdowns
+
+**Content:**
+- `Badge`, `Chip`, `Tag` - Labels and tags
+- `Callout` - Info boxes
+- `Tooltip`, `Popover` - Overlays
+- `Spinner` - Loading states
+
+**Icons:**
+- 605+ icons from `@mirohq/design-system-icons`
+- Use pattern: `import { IconName } from '@mirohq/design-system-icons'`
+
+### Design Token Reference
+
+All Miro design tokens are available in Tailwind and CSS variables. Just use natural names:
+
+**Colors:** `blue`, `gray`, `green`, `red`, `pink`, `purple`, `teal`, `cyan`, `orange`, `yellow`, etc.
+**Transparency:** `alpha-black`, `alpha-white` for semi-transparent overlays
+**Spacing:** `50`, `100`, `200`, `300`, `400`, `800` (translates to px: 4, 8, 16, 24, 32, 64)
+**Rounded corners:** `50`, `100`, `200`, `round`
+
+The AI knows how to use these. See [miro-design-tokens.md](./miro-design-tokens.md) for the complete list.
+
+### Onlook Visual Editor Tips
+
+1. **Component Structure**: Keep components simple and semantic for Onlook's visual editor
+2. **Tailwind for Layout**: Use Tailwind classes for layout (flex, grid) - Onlook can visualize these
+3. **styled-jsx for Theme**: Use styled-jsx with Miro tokens for component-specific theming
+4. **Inspect Mode**: Use Onlook's inspect mode to see which Miro tokens are applied
+5. **Live Preview**: Changes in Onlook sync back to your code automatically
 
 ## Project Structure
 

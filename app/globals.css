@@ -1,4 +1,5 @@
 @import '../styles/miro-tokens.css';
+@import '@mirohq/design-tokens/tokens.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
