@@ -81,7 +81,41 @@
 
 All Miro CSS variables are available (see `miro-design-tokens.md` for complete list):
 
-#### Colors
+#### Semantic Tokens (Preferred - Theme-aware)
+
+These tokens automatically adapt to light/dark themes and have semantic meaning:
+
+**Text Colors:**
+```css
+var(--colors-text-neutrals)              /* Primary text color */
+var(--colors-text-neutrals-subtle)       /* Secondary/muted text */
+var(--colors-text-neutrals-disabled)     /* Disabled text */
+var(--colors-text-neutrals-inverted)     /* Light text on dark bg */
+var(--colors-text-primary)               /* Primary brand text */
+var(--colors-text-danger)                /* Error/danger text */
+var(--colors-text-success)               /* Success text */
+```
+
+**Background Colors:**
+```css
+var(--colors-background-neutrals)        /* Default surface color */
+var(--colors-background-neutrals-layout) /* Page background */
+var(--colors-background-neutrals-subtle) /* Subtle background */
+var(--colors-background-neutrals-hover)  /* Hover state */
+var(--colors-background-primary-prominent)  /* Primary buttons */
+var(--colors-background-primary-subtle)     /* Primary backgrounds */
+var(--colors-background-danger-prominent)   /* Error states */
+```
+
+**Border Colors:**
+```css
+var(--colors-border-neutrals)            /* Default borders */
+var(--colors-border-neutrals-subtle)     /* Subtle borders */
+var(--colors-border-primary)             /* Primary borders */
+var(--colors-border-focus-outer)         /* Focus ring outer */
+```
+
+#### Base Color Tokens (Direct Colors)
 ```css
 var(--colors-blue-500)      /* Primary blue */
 var(--colors-gray-100)      /* Light gray */

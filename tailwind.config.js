@@ -8,6 +8,52 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Semantic Tokens - Text Colors (theme-aware)
+        'text-neutrals': 'var(--colors-text-neutrals)',
+        'text-neutrals-subtle': 'var(--colors-text-neutrals-subtle)',
+        'text-neutrals-disabled': 'var(--colors-text-neutrals-disabled)',
+        'text-neutrals-inverted': 'var(--colors-text-neutrals-inverted)',
+        'text-neutrals-placeholder': 'var(--colors-text-neutrals-placeholder)',
+        'text-primary': 'var(--colors-text-primary)',
+        'text-primary-hover': 'var(--colors-text-primary-hover)',
+        'text-danger': 'var(--colors-text-danger)',
+        'text-success': 'var(--colors-text-success)',
+        'text-warning': 'var(--colors-text-warning)',
+
+        // Semantic Tokens - Background Colors (theme-aware)
+        'background-neutrals': 'var(--colors-background-neutrals)',
+        'background-neutrals-layout': 'var(--colors-background-neutrals-layout)',
+        'background-neutrals-page': 'var(--colors-background-neutrals-page)',
+        'background-neutrals-subtle': 'var(--colors-background-neutrals-subtle)',
+        'background-neutrals-hover': 'var(--colors-background-neutrals-hover)',
+        'background-neutrals-pressed': 'var(--colors-background-neutrals-pressed)',
+        'background-neutrals-disabled': 'var(--colors-background-neutrals-disabled)',
+        'background-neutrals-inverted': 'var(--colors-background-neutrals-inverted)',
+        'background-primary-prominent': 'var(--colors-background-primary-prominent)',
+        'background-primary-prominent-hover': 'var(--colors-background-primary-prominent-hover)',
+        'background-primary-subtle': 'var(--colors-background-primary-subtle)',
+        'background-danger-prominent': 'var(--colors-background-danger-prominent)',
+        'background-danger-subtle': 'var(--colors-background-danger-subtle)',
+        'background-success-prominent': 'var(--colors-background-success-prominent)',
+        'background-success-subtle': 'var(--colors-background-success-subtle)',
+        'background-warning-prominent': 'var(--colors-background-warning-prominent)',
+        'background-warning-subtle': 'var(--colors-background-warning-subtle)',
+        'background-alpha': 'var(--colors-background-alpha)',
+        'background-alpha-hover': 'var(--colors-background-alpha-hover)',
+
+        // Semantic Tokens - Border Colors (theme-aware)
+        'border-neutrals': 'var(--colors-border-neutrals)',
+        'border-neutrals-subtle': 'var(--colors-border-neutrals-subtle)',
+        'border-neutrals-hover': 'var(--colors-border-neutrals-hover)',
+        'border-neutrals-disabled': 'var(--colors-border-neutrals-disabled)',
+        'border-primary': 'var(--colors-border-primary)',
+        'border-primary-hover': 'var(--colors-border-primary-hover)',
+        'border-danger': 'var(--colors-border-danger)',
+        'border-success': 'var(--colors-border-success)',
+        'border-focus-outer': 'var(--colors-border-focus-outer)',
+        'border-focus-middle': 'var(--colors-border-focus-middle)',
+        'border-focus-inner': 'var(--colors-border-focus-inner)',
+
         // Base colors
         black: '#1C1C1E',
         white: '#FFFFFF',
